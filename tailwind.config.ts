@@ -8,11 +8,15 @@ export default {
 		extend: {
 			colors: {
 				background: '#050914',
-				primary: '#0C1838',
+				primary: '#9DB0F6',
+				secondary: '#7A2385',
 				text: '#EAEAEA',
 				accent: '#F7ABE5',
 				placeholderText: '#808287',
 				formBg: '#0C1838'
+			},
+			fontFamily: {
+				playfair: ['"Playfair Display"', 'serif']
 			}
 		}
 	},
