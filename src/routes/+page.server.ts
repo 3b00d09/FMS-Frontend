@@ -1,9 +1,5 @@
-export const load = async({fetch})=>{ 
-    const req2 = await fetch('/api/auth', {
-        method: 'GET',
-        credentials: 'include'
-    });
+import type { PageServerLoad } from "./$types";
 
-    const res2 = await req2.json();
-    console.log(res2);
-}
+export const load:PageServerLoad = async ({ fetch, locals }) => {
+	return {user:locals.user}
+};

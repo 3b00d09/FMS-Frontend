@@ -1,5 +1,10 @@
 <script lang="ts">
     import HomepageCard from "$lib/components/HomepageCard.svelte";
+    import type { PageProps } from './$types';
+
+	let { data }: PageProps = $props();
+
+    console.log(data)
 </script>
 <header class="flex justify-around py-4 items-center">
     <div class="flex gap-4">
@@ -9,7 +14,11 @@
     </div>
     <div class="flex gap-8 items-center">
         <a class="text-2xl" href="/">Features</a>
-        <a href="/login"><button class="bg-secondary text-xl rounded-md py-2 px-6">Login</button></a>
+        {#if data.user}
+            <a href="/dashboard"><button class="bg-secondary text-xl rounded-md py-2 px-6">Dashboard</button></a>
+        {:else}
+            <a href="/login"><button class="bg-secondary text-xl rounded-md py-2 px-6">Login</button></a>
+        {/if}
     </div>
 </header>
 

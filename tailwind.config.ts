@@ -13,7 +13,8 @@ export default {
 				text: '#EAEAEA',
 				accent: '#F7ABE5',
 				placeholderText: '#808287',
-				formBg: '#0C1838'
+				formBg: '#0C1838',
+				linkHover: '9DB0F6'
 			},
 			fontFamily: {
 				playfair: ['"Playfair Display"', 'serif']
