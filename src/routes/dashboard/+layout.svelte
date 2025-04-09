@@ -2,7 +2,7 @@
 	import DashboardLink from "$lib/components/DashboardLink.svelte";
     let {children} = $props();
 </script>
-<main class="flex h-full w-full">
+<main class="flex h-screen w-screen">
     <section class="bg-formBg w-1/5 ">
         <div class="flex justify-between items-center py-6 px-4">
             <h2 class="text-primary text-5xl font-playfair">FMS</h2>

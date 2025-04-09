@@ -2,13 +2,17 @@
     import type { PageProps } from './$types';
 	import OwnedOrg from '$lib/components/OwnedOrg.svelte';
 	import JoinedOrg from '$lib/components/JoinedOrg.svelte';
+	import AddOrgDialog from '$lib/components/AddOrgDialog.svelte';
     let { data }: PageProps = $props();
+
+    let isOpen = $state(false);
 </script>
 
+<AddOrgDialog bind:isOpen={isOpen} user={data.user.id} />
 <section class="h-full w-full py-6 px-4">
     <div class="flex justify-between w-full items-start">
         <h2 class="text-primary text-5xl font-playfair">Welcome {data.user.username}</h2>
-        <button class="bg-secondary text-white rounded-md p-4 flex gap-2 text-xl"><span>+</span>Create Organisation</button>
+        <button onclick={()=>isOpen = true} class="bg-secondary text-white rounded-md p-4 flex gap-2 text-xl"><span>+</span>Create Organisation</button>
     </div>
 
     <div class="mt-16 flex flex-col gap-12">
@@ -24,5 +28,4 @@
             <JoinedOrg/>
         </div>
     </div>
-    
 </section>
