@@ -1,4 +1,4 @@
-import type { Actions } from '@sveltejs/kit';
+import { redirect, type Actions } from '@sveltejs/kit';
 
 export const actions: Actions = {
 	default: async ({ request, cookies, fetch }) => {
@@ -23,6 +23,10 @@ export const actions: Actions = {
 				sameSite: "lax",
 				httpOnly: true,
 			})
+			return redirect(300, "/dashboard")
+		}
+		else{
+			console.log("didnt work")
 		}
 	}
 };

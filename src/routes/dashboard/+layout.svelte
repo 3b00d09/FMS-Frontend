@@ -15,5 +15,14 @@
             <DashboardLink text="Account Settings" link="/dashboard" icon="" />
         </div>
     </section>
-    <section class="flex-1">{@render children()}</section>
+    <section class="flex-1 py-6 px-4">
+        <div class="flex justify-between w-full items-start">
+            <h2 class="text-primary text-5xl font-playfair">Welcome {"data.user.username"}</h2>
+            <!-- <button onclick={()=>isOpen = true} class="bg-secondary text-white rounded-md p-4 flex gap-2 text-xl"><span>+</span>Create Organisation</button> -->
+        </div>
+        <section class="flex flex-col gap-16 mt-16">
+            {@render children()}
+        </section>
+
+    </section>
 </main>

@@ -6,6 +6,7 @@ export const load:PageServerLoad = async ({ locals, fetch }) => {
     const res = await req.json()
     console.log(res)
     return {
-        user:locals.user
+        user:locals.user,
+        ownedOrg: res.data
     }
 };
