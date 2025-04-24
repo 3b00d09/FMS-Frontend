@@ -18,7 +18,7 @@
 </script>
 
 <!--uploading multiple files in a form: https://www.reddit.com/r/sveltejs/comments/1f5d78i/comment/lksgxpc-->
-<form action="?/uploadFiles" method="POST" class="max-w-md mx-auto p-4" enctype="multipart/form-data"    
+<form action="?/uploadFiles" method="POST" class="max-w-md px-2" enctype="multipart/form-data"    
     use:enhance={({ formData }) => {
     // clear any existing file entries that might come from the input
     formData.delete('file');
@@ -43,10 +43,10 @@
     {#if files.length > 0}
         <div class="mb-4">
             <h3 class="text-lg font-semibold mb-2">Selected Files:</h3>
-            <ul class="space-y-2">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {#each files as file, index}
-                    <li class="flex justify-between items-center p-2 bg-gray-50 rounded">
-                        <span class="text-black">{file.name}</span>
+                    <div class="flex justify-between items-center p-2 bg-gray-50 rounded border">
+                        <span class="text-black truncate max-w-[70%]">{file.name}</span>
                         <button 
                             type="button"
                             onclick={() => removeFile(index)}
@@ -54,17 +54,13 @@
                         >
                             Remove
                         </button>
-                    </li>
+                    </div>
                 {/each}
-            </ul>
+            </div>
         </div>
     {/if}
 
-    <button 
-        type="submit" 
-        class="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
-        disabled={files.length === 0}
-    >
+    <button type="submit" class="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600" disabled={files.length === 0}>
         Upload
     </button>
 </form>

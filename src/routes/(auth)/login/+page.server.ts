@@ -7,8 +7,8 @@ export const actions: Actions = {
 		const username = data.get('username') as string;
 		const password = data.get('password') as string;
 
-		const req = await fetch('/api/login', {
-			method: 'Post',
+		const req = await fetch('https://api.fmsatiya.live/login', {
+			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
 			},
