@@ -5,7 +5,6 @@ export const load:PageServerLoad = async ({ locals, fetch }) => {
 
     const req = await fetch("https://api.fmsatiya.live/owned-org")
     const res = await req.json()
-    console.log(res)
     return {
         user:locals.user,
         ownedOrg: res.data
@@ -47,5 +46,24 @@ export const actions: Actions = {
         }
 
         return { success: true };
+    },
+
+    uploadFolder:async({request, fetch})=>{
+        const formData = await request.formData()
+        const folderName = formData.get("folder-name")
+        const orgId = formData.get("org-id")
+        
+        const req = await fetch("https://api.fmsatiya.live/add-folder",{
+            method:"POST",
+            headers:{
+                "Content-Type": "application/json"
+            },
+            body:JSON.stringify({Name:folderName, Org_id: orgId})
+        })
+
+        const res = await req.json()
+        console.log(res)
+
+
     }
 };

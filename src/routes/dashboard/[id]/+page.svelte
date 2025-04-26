@@ -1,9 +1,12 @@
 <script lang="ts">
+	import { enhance } from "$app/forms";
+	import OwnedOrg from "$lib/components/OwnedOrg.svelte";
 	import UploadFileForm from "$lib/components/UploadFileForm.svelte";
     import type { PageProps } from "../$types";
 
     let { data }: PageProps = $props();
     let showUpload = $state(false);
+    let showFolderUpload = $state(false);
 </script>
 <h2 class="text-5xl text-primary">{data.ownedOrg.Name}</h2>
 
@@ -12,9 +15,16 @@
 
 <div>
     <button class="bg-accent text-black p-2 rounded-md" onclick={()=>showUpload = !showUpload}>Upload File</button>
-    <button class="bg-accent text-black p-2 rounded-md">Add Folder</button>
+    <button class="bg-accent text-black p-2 rounded-md" onclick={()=>showFolderUpload = !showFolderUpload}>Add Folder</button>
 </div>
 
+{#if showFolderUpload}
+    <form use:enhance method="POST" action="?/uploadFolder">
+        <input type="text" name="folder-name">
+        <input type="hidden" name="org-id" value={data.ownedOrg.ID}>
+        <button type="submit">Submit</button>
+    </form>
+{/if}
 
 {#if showUpload}
     <UploadFileForm/>

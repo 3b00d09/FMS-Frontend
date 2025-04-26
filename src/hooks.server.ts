@@ -14,7 +14,7 @@ export const handle: Handle = async ({ event, resolve }) => {
             id: user.ID
         }
     } catch (e) {
-        console.log('akalna khara');
+        console.log("Error in hooks: ", e)
     }
     
 
