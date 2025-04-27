@@ -9,12 +9,19 @@ export const handle: Handle = async ({ event, resolve }) => {
             credentials: 'include'
         });
         const {user} = await req.json();
-        event.locals.user = {
-            username: user.Username,
-            id: user.ID
+        if (user.ID === ""){
+            event.locals.user = null
         }
+        else{
+            event.locals.user = {
+                username: user.Username,
+                id: user.ID
+            }
+        }
+
+
     } catch (e) {
-        console.log("Error in hooks: ", e)
+        event.locals.user = null
     }
     
 

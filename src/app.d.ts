@@ -6,7 +6,7 @@ declare global {
 			user: {
 				username: String;
 				id: String;
-			};
+			} | null;
 		}
 
 		// interface Error {}
