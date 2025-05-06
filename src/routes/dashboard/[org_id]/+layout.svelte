@@ -1,10 +1,9 @@
 <script lang="ts">
 	import { enhance } from "$app/forms";
-	import OwnedOrg from "$lib/components/OwnedOrg.svelte";
 	import UploadFileForm from "$lib/components/UploadFileForm.svelte";
-    import type { PageProps } from "../$types";
 
-    let { data }: PageProps = $props();
+    let { data, children } = $props();
+    console.log(data)
     let showUpload = $state(false);
     let showFolderUpload = $state(false);
 </script>
@@ -43,40 +42,12 @@
 
 
 <div class="grid grid-cols-6 border-b border-placeholderText p-2 rounded-md text-xl">
+    <p></p>
     <p>Name</p>
-    <p>Last Modified</p>
-    <p>Modified By</p>
+    <p>Uploaded At</p>
     <p>Uploaded By</p>
     <p>Size</p>
-
+    <p>Action</p>
 </div>
 
-<div class="grid grid-cols-6 p-2 gap-4">
-    <p>file1</p>
-    <p>September 9th 2025</p>
-    <p>Anon64942495</p>
-    <p>Anon</p>
-    <p>1.2mb</p>
-    <p>Delete</p>
-
-    <p>file2</p>
-    <p>September 9th 2025</p>
-    <p>Anon64942495</p>
-    <p>Anon</p>
-    <p>1.2mb</p>
-    <p>Delete</p>
-
-    <p>file3</p>
-    <p>September 9th 2025</p>
-    <p>Anon64942495</p>
-    <p>Anon</p>
-    <p>1.2mb</p>
-    <p>Delete</p>
-
-    <p>file4</p>
-    <p>September 9th 2025</p>
-    <p>Anon64942495</p>
-    <p>Anon</p>
-    <p>1.2mb</p>
-    <p>Delete</p>
-</div>
+{@render children()}
