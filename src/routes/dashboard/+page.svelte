@@ -8,7 +8,7 @@
     let isOpen = $state(false);
 </script>
 
-<AddOrgDialog bind:isOpen={isOpen} user={data.user.id} />
+<AddOrgDialog bind:isOpen={isOpen} user={data.user?.id} />
 
 <div class="flex flex-col gap-12">
     <h2 class="text-primary text-4xl font-semibold">My Organisation</h2>

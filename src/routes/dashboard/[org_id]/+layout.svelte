@@ -1,16 +1,26 @@
 <script lang="ts">
 	import { enhance } from "$app/forms";
 	import UploadFileForm from "$lib/components/UploadFileForm.svelte";
+	import { onMount } from "svelte";
+    import {page} from "$app/state"
 
     let { data, children } = $props();
-    console.log(data)
     let showUpload = $state(false);
     let showFolderUpload = $state(false);
+    let breadCrumbs = $derived(page.url.pathname.split("/").splice(3));
+
 </script>
 <h2 class="text-5xl text-primary">{data.ownedOrg.Name}</h2>
 
 <div>Storage Used</div>
-<div>Home &gt files</div>
+<div class="flex gap-2">
+    {#each breadCrumbs as crumb, i}
+        <a href={page.url.pathname.split('/').slice(0, i+4 || undefined).join('/')}>{decodeURIComponent(crumb)}</a>
+        {#if i < breadCrumbs.length - 1}
+            <p>&gt</p>
+        {/if}
+    {/each}
+</div>
 
 <div>
     <button class="bg-accent text-black p-2 rounded-md" onclick={()=>showUpload = !showUpload}>Upload File</button>
