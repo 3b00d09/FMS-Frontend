@@ -1,9 +1,9 @@
 <script lang="ts">
-    import type { PageProps } from './$types';
+    import type { LayoutProps } from './$types';
 	import OwnedOrg from '$lib/components/OwnedOrg.svelte';
 	import JoinedOrg from '$lib/components/JoinedOrg.svelte';
 	import AddOrgDialog from '$lib/components/AddOrgDialog.svelte';
-    let { data }: PageProps = $props();
+    let { data }: LayoutProps = $props();
 
     let isOpen = $state(false);
 </script>

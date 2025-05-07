@@ -1,29 +1,13 @@
-import type { Actions } from "@sveltejs/kit";
+import { redirect, type Actions } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
 import type { folderData } from "$lib/types";
 
-export const load:PageServerLoad = async ({ locals, fetch, params }) => {
-
-    const orgId = params.org_id
-
-    const req2 = await fetch("https://api.fmsatiya.live/view-root-folder?org_id=" + orgId)
-    const res2= await req2.json()
-    let folders: folderData[] = [];
-
-    if(req2.status === 202){
-        res2.data.forEach((folder:folderData)=>{
-            folders.push(folder)
-        })
-    }
-
-    return {
-        user:locals.user,
-        rootFolderData: folders,
-    }
+export const load:PageServerLoad = async () => {
+    return redirect(301, "/root")
 };
 
 export const actions: Actions = {
-    uploadFiles: async ({ request, fetch }) => {
+    uploadFiles: async ({ request, fetch, url }) => {
         const formData = await request.formData();
         const files: File[] = [];
         
@@ -44,15 +28,16 @@ export const actions: Actions = {
 
         console.log("---------------------------")
         try{
-            const req = await fetch("/api/upload-test",{
+            const req = await fetch("https://api.fmsatiya.live/upload-test",{
                 method:"POST",
                 body: backendFormData
             })
-            console.log(req.status)
-            const res = await req.json()
-            console.log(res)
+            // console.log(req.status)
+            // const res = await req.json()
+            // console.log(res)
         }
         catch(e){
+            console.log("upload explode")
             console.log(e)
         }
 

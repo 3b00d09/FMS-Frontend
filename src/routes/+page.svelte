@@ -4,7 +4,6 @@
 
 	let { data }: PageProps = $props();
 
-    console.log(data)
 </script>
 <header class="flex justify-around py-4 items-center">
     <div class="flex gap-4">

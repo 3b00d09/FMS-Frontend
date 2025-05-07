@@ -14,7 +14,7 @@
     </div>
     <div class="flex gap-6 justify-around pt-4">
         <button class="bg-secondary p-2 rounded-md font-semibold">Invite Members</button>
-        <a href="/dashboard/{orgId.ID}" class="bg-primary bg-opacity-10 p-2 rounded-md">View Files</a>
+        <a href="/dashboard/{orgId.ID}/root" class="bg-primary bg-opacity-10 p-2 rounded-md">View Files</a>
         <button>Settings Icon</button>
     </div>
 </div>
