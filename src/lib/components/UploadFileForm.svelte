@@ -19,7 +19,7 @@
 </script>
 
 <!--uploading multiple files in a form: https://www.reddit.com/r/sveltejs/comments/1f5d78i/comment/lksgxpc-->
-<form action={`/dashboard/${orgId}?/uploadFiles`} method="POST" class="max-w-md px-2" enctype="multipart/form-data"    
+<form action="?/uploadFiles" method="POST" class="max-w-md px-2" enctype="multipart/form-data"    
     use:enhance={({ formData }) => {
     // clear any existing file entries that might come from the input
     formData.delete('file');

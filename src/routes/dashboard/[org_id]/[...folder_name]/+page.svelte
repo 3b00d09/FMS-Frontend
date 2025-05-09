@@ -3,6 +3,7 @@
     import { enhance } from "$app/forms";
 	import UploadFileForm from "$lib/components/UploadFileForm.svelte";
     import {page} from "$app/state"
+	import FileColumn from "$lib/components/FileColumn.svelte";
 
     let { data } = $props();
     let showUpload = $state(false);
@@ -51,15 +52,20 @@
 </div>
 
 
-<div class="grid grid-cols-6 border-b border-placeholderText p-2 rounded-md text-xl">
+<div class="grid grid-cols-7 border-b border-placeholderText p-2 rounded-md text-xl">
     <p></p>
     <p>Name</p>
+    <p>Type</p>
     <p>Uploaded At</p>
     <p>Uploaded By</p>
     <p>Size</p>
     <p>Action</p>
 </div>
 
-{#each data.rootFolderData as folder (folder.id)}
+{#each data.folderData as folder (folder.id)}
     <FolderColumn folder={folder} parentFolders={data.parentFolders}/>
+{/each}
+
+{#each data.fileData as file (file.id)}
+    <FileColumn file={file}/>
 {/each}

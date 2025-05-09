@@ -6,3 +6,14 @@ export type folderData = {
     parent_folder_id: number | null,
     created_at: string
 }
+
+export type fileData = {
+    id: number,
+    orgId: number,
+    uploader: string,
+    name: string,
+    parent_folder_id: number | null,
+    created_at: string,
+    type: string,
+    size: number
+}
