@@ -1,6 +1,12 @@
 <script lang="ts">
+	import InviteMembersDialog from "./InviteMembersDialog.svelte";
+
     let {orgId} = $props();
+
+    let isOpen = $state(false);
 </script>
+
+<InviteMembersDialog bind:isOpen={isOpen} {orgId}/>
 <div class="max-w-fit p-2 bg-formBg rounded-xl flex flex-col gap-6 text-xl py-6">
     <div class="flex justify-between items-center">
         <p class="text-2xl font-semibold">{orgId.Name}</p>
@@ -13,7 +19,7 @@
         <p class="text-primary">1.2/5GB</p>
     </div>
     <div class="flex gap-6 justify-around pt-4">
-        <button class="bg-secondary p-2 rounded-md font-semibold">Invite Members</button>
+        <button onclick={()=>isOpen = true} class="bg-secondary p-2 rounded-md font-semibold">Invite Members</button>
         <a href="/dashboard/{orgId.ID}/root" class="bg-primary bg-opacity-10 p-2 rounded-md">View Files</a>
         <button>Settings Icon</button>
     </div>

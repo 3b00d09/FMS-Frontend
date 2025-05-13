@@ -8,10 +8,6 @@
 	const toastState = getToastState();
 
 	let { children } = $props();
-
-	const handleClick = () =>{
-		toastState.triggerToast("ERROR", "success", 3000)
-	}
 </script>
 
 <main class="min-h-screen w-full bg-background text-text overflow-x-hidden">
@@ -27,7 +23,6 @@
 			</p>
 		</div>
 	{/if}
-	<button class="bg-red-50 text-5xl text-black" onclick={handleClick}>HELLO CLICK</button>
 	{@render children()}
 </main>
 

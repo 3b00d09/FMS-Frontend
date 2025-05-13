@@ -10,10 +10,14 @@
 
 <AddOrgDialog bind:isOpen={isOpen} user={data.user?.id} />
 
-<div class="flex flex-col gap-12">
-    <h2 class="text-primary text-4xl font-semibold">My Organisation</h2>
-    <OwnedOrg orgId={data.ownedOrg}/>
-</div>
+{#if data.ownedOrg}
+    <div class="flex flex-col gap-12">
+        <h2 class="text-primary text-4xl font-semibold">My Organisation</h2>
+        <OwnedOrg orgId={data.ownedOrg}/>
+    </div>
+{:else}
+    <button onclick={()=>isOpen=true}>Add Organisation</button>
+{/if}
 
 <div class="flex flex-col gap-12">
     <h2 class="text-primary text-4xl font-semibold">Joined Organisations</h2>

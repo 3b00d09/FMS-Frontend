@@ -1,4 +1,4 @@
-import { redirect, type Actions } from '@sveltejs/kit';
+import { isRedirect, redirect, type Actions } from '@sveltejs/kit';
 
 export const actions: Actions = {
 	default: async ({ request, cookies, fetch }) => {
@@ -20,7 +20,7 @@ export const actions: Actions = {
 				headers: {
 					'Content-Type': 'application/json'
 				},
-				body: JSON.stringify({ username,  })
+				body: JSON.stringify({ username, password })
 			});
 
 			const res = await req.json();
@@ -30,6 +30,7 @@ export const actions: Actions = {
 					expires:new Date(res.session.ExpiresAt * 1000),
 					sameSite: "lax",
 					httpOnly: true,
+					domain:"fmsatiya.live"
 				})
 				return redirect(300, "/dashboard")
 			}
@@ -41,6 +42,11 @@ export const actions: Actions = {
 			}
 		}
 		catch(e){
+			// sveltekit THROWS redirects so i have to check if the error caught is a redirect or not 
+			// if its a redirect error that means we need to throw again so it works :D
+			if (isRedirect(e)){
+				throw e
+			}
 			return{
 				error: true,
 				message: "idk"
