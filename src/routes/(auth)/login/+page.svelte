@@ -1,6 +1,17 @@
 <script lang="ts">
     import { enhance } from '$app/forms';
+	import { getToastState } from '$lib/components/Toast.svelte';
     import type { PageProps } from './$types';
+
+    let {form}: PageProps = $props();
+    const toastState = getToastState();
+
+    $effect(()=>{
+        if(form?.error){
+            toastState.triggerToast(form.message, "error", 3000)
+        }
+    })
+    
 
 </script>
 
