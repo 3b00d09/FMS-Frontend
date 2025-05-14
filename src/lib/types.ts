@@ -1,3 +1,9 @@
+export type organisation = {
+    id: string,
+    name: string,
+    storageUsed: number,
+}
+
 export type folderData = {
     id: number,
     org_id: number,
