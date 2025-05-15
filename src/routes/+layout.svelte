@@ -14,7 +14,7 @@
 	{#if toastState.isActive}
 		<div class="fixed top-4 right-4 z-50">
 			<p 
-				class="text-white text-xl p-4 rounded-md shadow-lg"
+				class="text-white text-xl p-4 rounded-md shadow-lg capitalize"
 				class:bg-green-600={toastState.status === 'success'}
 				class:bg-red-600={toastState.status === 'error'}
 				transition:fly={{ x: 300, duration: 500, easing: quintOut }}

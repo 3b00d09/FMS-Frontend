@@ -39,7 +39,6 @@ export const load:PageServerLoad = async ({ locals, fetch, params }) => {
 export const actions: Actions = {
     uploadFiles: async ({ request, fetch, url, params }) => {
         const parentFolderName = params.folder_name?.split("/")
-        console.log(parentFolderName)
         const orgId = params.org_id
         // good ol' typechecking
         if(!parentFolderName || !orgId || parentFolderName?.length === 0 || orgId?.length === 0){

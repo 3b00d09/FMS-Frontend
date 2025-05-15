@@ -24,22 +24,21 @@ export const actions: Actions = {
 			});
 
 			const res = await req.json();
-			if(req.status === 202){
-				cookies.set("session_token", res.session.ID, {
-					path:"/",
-					expires:new Date(res.session.ExpiresAt * 1000),
-					sameSite: "lax",
-					httpOnly: true,
-					domain:"fmsatiya.live"
-				})
-				return redirect(300, "/dashboard")
+			if(res.error){
+				return{
+					error: true,
+					message: res.error as string
+				}
 			}
-
-			else{
-				console.log("didnt work")
-				console.log(req.status)
-				console.log(res)
-			}
+			cookies.set("session_token", res.session.ID, {
+				path:"/",
+				expires:new Date(res.session.ExpiresAt * 1000),
+				sameSite: "lax",
+				httpOnly: true,
+				domain:"fmsatiya.live"
+			})
+			return redirect(308, "/dashboard")
+			
 		}
 		catch(e){
 			// sveltekit THROWS redirects so i have to check if the error caught is a redirect or not 
@@ -49,7 +48,7 @@ export const actions: Actions = {
 			}
 			return{
 				error: true,
-				message: "idk"
+				message: "Service Could not be reached. Please try again later."
 			}
 		}
 

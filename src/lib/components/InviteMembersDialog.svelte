@@ -17,7 +17,6 @@
             credentials:"include"
         })
         const res = await req.json()
-        console.log(res)
         users = res.users
     }
     catch(e){

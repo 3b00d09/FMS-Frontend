@@ -1,7 +1,7 @@
-import type { Actions } from "@sveltejs/kit";
+import { isRedirect, redirect, type Actions } from "@sveltejs/kit";
 
 export const actions:Actions = {
-    default:async({request, fetch})=>{
+    default:async({request, fetch, cookies})=>{
         const data = await request.formData();
 
         const username = data.get('username') as string;
@@ -10,20 +10,45 @@ export const actions:Actions = {
 
         if(password != repeatPassword){
             return{
-                success: false,
+                error: true,
                 message: "Passwords don't match"
             }
         }
 
-        const req = await fetch("/api/register",{
-            method:"Post",
-            headers:{
-                "Content-Type": "application/json"
-            },
-            body:JSON.stringify({username, password})
-        })
+        try{
+            const req = await fetch("https://api.fmsatiya.live/register",{
+                method:"Post",
+                headers:{
+                    "Content-Type": "application/json"
+                },
+                body:JSON.stringify({username, password})
+            })
+            const res = await req.json()
 
-        const res = await req.json()
-        console.log(res)
+            if(res.error){
+                return{
+                    error: true,
+                    message: res.error
+                }
+            }
+            cookies.set("session_token", res.session.ID, {
+                path:"/",
+                expires:new Date(res.session.ExpiresAt * 1000),
+                sameSite: "lax",
+                httpOnly: true,
+                domain:"fmsatiya.live"
+            })
+            return redirect(308, "/dashboard")
+        }
+        catch(e){
+            if(isRedirect(e)){
+                throw e
+            }
+            return{
+                error: true,
+                message: "Service cannot be reached. Please try again later."
+            }
+        }
+
     }
 }

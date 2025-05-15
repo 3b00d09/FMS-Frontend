@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { folderData } from "$lib/types";
-    import { formatDate, formatSize } from "$lib/helpers";
+    import { formatDate } from "$lib/helpers";
 
     let {folder, parentFolders}:{folder: folderData, parentFolders: string[]} = $props()
     let url = parentFolders.join("/")
@@ -8,12 +8,18 @@
 </script>
 
 
-<a data-sveltekit-preload-data=off href={`/dashboard/${folder.org_id}/${url}/${folder.name}`} class="grid grid-cols-7 px-2 mt-[-2rem] gap-4">
+<a data-sveltekit-preload-data=off href={`/dashboard/org/${folder.orgId}/${url}/${folder.name}`} class="grid grid-cols-6 gap-4 px-2 mt-[-2rem] hover:bg-gray-700">
+    <div class="flex items-center truncate">
+        <i class="fas fa-folder text-indigo-400 mr-2"></i>
+        <span>{folder.name}</span>
+    </div>
     <p>Folder</p>
-    <p class="truncate">{folder.name}</p>
-    <p>Folder</p>
-    <p>{formatDate(folder.created_at)}</p>
+    <p>{formatDate(folder.createdAt)}</p>
     <p>{folder.uploader}</p>
     <p>nill</p>
-    <p>Delete</p>
+    <div class="flex gap-2">
+        <button aria-label="Delete File" class="text-red-400 hover:text-red-300">
+            <i class="fas fa-trash"></i>
+        </button>
+    </div>
 </a>

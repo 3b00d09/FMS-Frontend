@@ -9,12 +9,15 @@ export const load:LayoutServerLoad = async ({ locals, fetch }) => {
         if(req.status === 202){
             const res = await req.json()
             const org = res.org as organisation
-            if(org.id && org.id.length === 0){
+            if(org.id.length === 0){
                 return{
                     user: locals.user,
                     ownedOrg: null
                 }
             }
+            const req2 = await fetch("https://api.fmsatiya.live/view-org-members")
+            const res2 = await req2.json()
+            console.log(res2)
             return {
                 user:locals.user,
                 ownedOrg: org

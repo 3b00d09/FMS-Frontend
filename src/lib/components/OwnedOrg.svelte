@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { formatSize } from "$lib/helpers";
 	import type { organisation } from "$lib/types";
 	import InviteMembersDialog from "./InviteMembersDialog.svelte";
 
@@ -18,12 +19,12 @@
     <div class="grid grid-cols-2 px-2">
         <p class="text-placeholderText">Members</p>
         <p class="text-placeholderText">Usage</p>
-        <p class="text-primary">8</p>
-        <p title={`${org.storageUsed} bytes`} class="text-primary">{storageUsed + "/5GB"}</p>
+        <p class="text-primary">{org.memberCount}</p>
+        <p title={formatSize(org.storageUsed)} class="text-primary">{storageUsed + "/5GB"}</p>
     </div>
-    <div class="flex gap-6 justify-around pt-4">
+    <div class="flex gap-6 justify-around items-center pt-4">
         <button onclick={()=>isOpen = true} class="bg-secondary p-2 rounded-md font-semibold">Invite Members</button>
-        <a href="/dashboard/{org.id}/root" class="bg-primary bg-opacity-10 p-2 rounded-md">View Files</a>
-        <button>Settings Icon</button>
+        <a href="/dashboard/org/{org.id}/root" class="bg-primary bg-opacity-10 p-2 rounded-md">View Files</a>
+        <a href="/dashboard/org/{org.id}/settings">Settings Icon</a>
     </div>
 </div>
