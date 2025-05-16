@@ -40,3 +40,9 @@ export type inviteData = {
     orgName: string,
     invitedAt: string,
 }
+
+export type organisationMember = {
+    username: string,
+    role: string,
+    joinedAt: string,
+}
