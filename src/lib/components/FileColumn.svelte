@@ -1,8 +1,10 @@
 <script lang="ts">
 	import type { fileData } from "$lib/types";
     import { formatDate, formatSize, stripFileType } from "$lib/helpers";
-
-    let {file}: {file:fileData} = $props();
+	import { enhance } from "$app/forms";
+	import { getToastState } from "./Toast.svelte";
+	import type { ActionData } from "../../routes/$types";
+    let {file, canEdit}: {file:fileData, canEdit: boolean} = $props();
 
 </script>
 
@@ -20,8 +22,13 @@
         <button aria-label="Download File" class="text-blue-400 hover:text-blue-300">
             <i class="fas fa-download"></i>
         </button>
-        <button aria-label="Delete File" class="text-red-400 hover:text-red-300">
-            <i class="fas fa-trash"></i>
-        </button>
-    </div>
+        {#if canEdit}
+            <form use:enhance action="?/deleteFile" method="POST">
+                <button type="submit" aria-label="Delete File" class="text-red-400 hover:text-red-300">
+                    <i class="fas fa-trash"></i>
+                </button>
+                <input type="hidden" name="file-id" value={file.id}/>
+            </form>
+        {/if}
+        </div>
 </div>

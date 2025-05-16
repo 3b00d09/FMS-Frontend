@@ -5,6 +5,14 @@ export type organisation = {
     memberCount: number,
 }
 
+
+export type joinedOrganisation = {
+    id: string,
+    name: string,
+    role: string,
+    creatorName: string
+}
+
 export type folderData = {
     id: number,
     orgId: number,

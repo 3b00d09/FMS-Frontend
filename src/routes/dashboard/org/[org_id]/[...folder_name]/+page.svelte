@@ -5,24 +5,38 @@
     import {page} from "$app/state"
 	import FileColumn from "$lib/components/FileColumn.svelte";
 	import { formatSize } from "$lib/helpers.js";
+    import { getToastState } from "$lib/components/Toast.svelte.js";
 
-    let { data } = $props();
+    let { data, form } = $props();
     let showUpload = $state(false);
     let showFolderUpload = $state(false);
     let breadCrumbs = $derived(page.url.pathname.split("/").splice(4));
+
+    const toastState = getToastState()
+
+    $effect(()=>{
+        if(form?.error){
+            toastState.triggerToast(form.message, "error", 3000)
+        }
+    })
   
 </script>
-{#if data.ownedOrg}
-    <h2 class="text-5xl text-primary">{data.ownedOrg?.name}</h2>
+
+{#if data.error}
+    <p>{data.message}</p>
+{:else if !data.org || !data.role}
+    <p>Org not found</p>
+{:else}
+    <h2 class="text-5xl text-primary">{data.org.name}</h2>
 
     <div class="bg-gray-800 rounded-lg p-4">
         <h2 class="text-lg font-semibold mb-2">Storage Used</h2>
         <div class="w-full bg-gray-700 rounded-full h-4">
             <!--calculate a percentage of the storage used-->
-            <div class="bg-pink-500 h-2 rounded" style={`width: ${(data.ownedOrg?.storageUsed / (5 * 1024 * 1024 * 1024)) * 100}%`}></div>
+            <div class="bg-pink-500 h-2 rounded" style={`width: ${(data.org.storageUsed / (5 * 1024 * 1024 * 1024)) * 100}%`}></div>
         </div>
         <div class="flex justify-between mt-2 text-sm">
-            <span>{formatSize(data.ownedOrg?.storageUsed)} used</span>
+            <span>{formatSize(data.org.storageUsed)} used</span>
             <span>5 GB</span>
         </div>
     </div>
@@ -36,39 +50,42 @@
         {/each}
     </div>
 
-    <div class="flex flex-wrap gap-3">
-        <button onclick={()=>showUpload = !showUpload} class="bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded-lg flex items-center">
-            <i class="fas fa-upload mr-2"></i>
-            Upload File
-        </button>
-        <button onclick={()=>showFolderUpload = !showFolderUpload} class="bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded-lg flex items-center">
-            <i class="fas fa-folder-plus mr-2"></i>
-            Add Folder
-        </button>
-        <a href={`/dashboard/org/${data.ownedOrg.id}/settings`} class="bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded-lg flex items-center">
-            <i class="fas fa-gear mr-2"></i>
-            Settings
-        </a>
-        <div class="flex-grow"></div>
-        <div class="relative">
-            <input type="text" placeholder="Search..." class="w-full md:w-64 bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+    {#if data.role.toLocaleLowerCase() === "editor" || data.role.toLocaleLowerCase() === "owner"}
+        <div class="flex flex-wrap gap-3">
+            <button onclick={()=>showUpload = !showUpload} class="bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded-lg flex items-center">
+                <i class="fas fa-upload mr-2"></i>
+                Upload File
+            </button>
+            <button onclick={()=>showFolderUpload = !showFolderUpload} class="bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded-lg flex items-center">
+                <i class="fas fa-folder-plus mr-2"></i>
+                Add Folder
+            </button>
+            {#if data.role.toLocaleLowerCase() === "owner"}
+                <a href={`/dashboard/org/${data.org.id}/settings`} class="bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded-lg flex items-center">
+                    <i class="fas fa-gear mr-2"></i>
+                    Settings
+                </a>
+            {/if}
+            <div class="flex-grow"></div>
+            <div class="relative">
+                <input type="text" placeholder="Search..." class="w-full md:w-64 bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            </div>
         </div>
-    </div>
+    {/if}
 
     {#if showFolderUpload}
         <form use:enhance method="POST" action="?/uploadFolder">
             <input type="text" name="folder-name">
-            <input type="hidden" name="org-id" value={data.ownedOrg?.id}>
+            <input type="hidden" name="org-id" value={data.org.id}>
             <button type="submit">Submit</button>
         </form>
     {/if}
 
     {#if showUpload}
-        <UploadFileForm orgId={data.ownedOrg?.id}/>
+        <UploadFileForm orgId={data.org.id}/>
     {/if}
 
-    <div class="flex justify-between items-center">
-        <div class="text-sm text-gray-400">Showing 4 items</div>
+    <div class="flex justify-end items-center">
         <div class="flex space-x-4">
             <div class="relative">
                 <button class="bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg flex items-center">
@@ -94,12 +111,15 @@
         <p>Action</p>
     </div>
 
-    {#each data.folderData as folder (folder.id)}
-        <FolderColumn folder={folder} parentFolders={data.parentFolders}/>
-    {/each}
+    {#if data.folderData}
+        {#each data.folderData as folder (folder.id)}
+            <FolderColumn folder={folder} parentFolders={data.parentFolders} canEdit={data.role.toLocaleLowerCase() === "editor" || data.role.toLocaleLowerCase() === "owner"}/>
+        {/each}
+    {/if}
 
-    {#each data.fileData as file (file.id)}
-        <FileColumn file={file}/>
-    {/each}
-
+    {#if data.fileData}
+        {#each data.fileData as file (file.id)}
+            <FileColumn file={file} canEdit={data.role.toLocaleLowerCase() === "editor" || data.role.toLocaleLowerCase() === "owner"}/>
+        {/each}
+    {/if}
 {/if}

@@ -37,7 +37,6 @@
                 <div class="w-1/4 font-medium">Role</div>
             </div>
             
-            <!-- Member 1 - Owner -->
             <div class="flex py-3 items-center border-b border-gray-700">
                 <div class="w-1/4 flex items-center">
                     <div class="w-8 h-8 rounded-full bg-gray-600 flex items-center justify-center mr-3 text-sm font-medium">JD</div>
@@ -48,7 +47,6 @@
                 </div>
             </div>
             
-            <!-- Member 2 - Regular member with Editor role -->
             <div class="flex py-3 items-center border-b border-gray-700">
                 <div class="w-1/4 flex items-center">
                     <div class="w-8 h-8 rounded-full bg-gray-600 flex items-center justify-center mr-3 text-sm font-medium">JS</div>
@@ -62,7 +60,6 @@
                 </div>
             </div>
             
-            <!-- Member 3 - Regular member with Viewer role -->
             <div class="flex py-3 items-center border-b border-gray-700">
                 <div class="w-1/4 flex items-center">
                     <div class="w-8 h-8 rounded-full bg-gray-600 flex items-center justify-center mr-3 text-sm font-medium">AB</div>
@@ -79,7 +76,7 @@
     </div>
 
 
-    <div class="settings-card p-6 border border-red-800">
+    <div class="p-6 border border-red-800">
         <h3 class="text-xl mb-4 text-red-400">Danger Zone</h3>
         
         <div class="mb-6">

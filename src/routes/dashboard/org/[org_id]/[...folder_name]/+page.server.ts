@@ -1,84 +1,104 @@
-import type { Actions } from "@sveltejs/kit";
+import { redirect, type Actions } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
 import type { folderData, fileData } from "$lib/types";
 
 export const load:PageServerLoad = async ({ locals, fetch, params }) => {
+    if(!locals.user){
+        return redirect(301, "/login")
+    }
 
+    // get the data from url parameters
     const folderParams = params.folder_name.split("/")
     const folderName = folderParams[folderParams.length - 1]
     const orgId = params.org_id
 
-    const req2 = await fetch("https://api.fmsatiya.live/view-folder-children?folder_name=" + folderName+"&org_id="+ orgId)
-    const res2= await req2.json()
+    // variables to hold data
     let folders: folderData[] = [];
     let files: fileData[] = [];
 
-    if(req2.status === 202){
-        if(res2.folders && res2.folders.length > 0){
-            res2.folders.forEach((folder:folderData)=>{
-                folders.push(folder)
-            })
-        }
-        
-        if(res2.files && res2.files.length > 0){
-            res2.files.forEach((file: fileData)=>{
-                files.push(file)
-            })
-        }
-
+    const req = await fetch("https://api.fmsatiya.live/view-folder-children?folder_name=" + folderName+"&org_id="+ orgId)
+    // if the server was unable to authenticate the user
+    if(req.status === 401){
+        return redirect(301, "/login")
     }
+
+    // if the user attempts to view an org they don't belong to
+    else if(req.status === 403){
+        return{
+            error: true,
+            message: "You do not have permission to view this org",
+        }
+    }
+
+    const res= await req.json()
+
+    // if data exists, iterate over and append
+    if(res.folders && res.folders.length > 0){
+        res.folders.forEach((folder:folderData)=>{
+            folders.push(folder)
+        })
+    }
+        
+    if(res.files && res.files.length > 0){
+        res.files.forEach((file: fileData)=>{
+            files.push(file)
+        })
+    }
+
     return {
         user:locals.user,
         folderData: folders,
         fileData: files,
         parentFolders: folderParams
     }
-};
-
+}
 
 export const actions: Actions = {
-    uploadFiles: async ({ request, fetch, url, params }) => {
+    uploadFiles: async ({ request, fetch, params }) => {
         const parentFolderName = params.folder_name?.split("/")
         const orgId = params.org_id
         // good ol' typechecking
         if(!parentFolderName || !orgId || parentFolderName?.length === 0 || orgId?.length === 0){
-            console.log("MISSING ARGS FOR FILE UPLOAD")
-            return;
+            return{
+                error: true,
+                message: "Missing URL params. Please refresh the page and try again."
+            }
         } 
         const formData = await request.formData();
-        const files: File[] = [];
-        
-        // parse the files one by one, form prefixes files with "file-"
-        for (const [key, value] of formData.entries()) {
-            if (key.startsWith('file-') && value instanceof File) {
-                files.push(value);
+        const file = formData.get("file")
+        if(!file || !(file instanceof File)){
+            return{
+                error: true,
+                message: "No file detected."
             }
         }
 
         // create a new FormData to send to the go server
         const backendFormData = new FormData();
 
-        // append files
-        files.forEach((file, index) => {
-            backendFormData.append('files[]', file);
-        });
+        // append file and necessary data
+        backendFormData.append('file', file);
         backendFormData.append('orgId', orgId)
         backendFormData.append('parentFolderName', parentFolderName[parentFolderName.length - 1])
 
         try{
-            const req = await fetch(`https://api.fmsatiya.live/upload-test`,{
+            const req = await fetch(`https://api.fmsatiya.live/add-file`,{
                 method:"POST",
                 body: backendFormData
             })
-            const res = await req.json()
-            console.log(res)
+            if(req.status === 202){
+                return{
+                    success: true,
+                    message: "File Uploaded successfully."
+                }
+            }
         }
         catch(e){
-            console.log("upload explode")
-            console.log(e)
+            return{
+                error: true,
+                message: e,
+            }
         }
-
-        return { success: true };
     },
 
     uploadFolder:async({request, fetch, params})=>{
@@ -103,5 +123,34 @@ export const actions: Actions = {
         console.log(res)
 
 
+    },
+
+
+    deleteFile:async({request, fetch})=>{
+        const data = await request.formData()
+        const fileId = data.get("file-id")
+        if(!fileId){
+            return{
+                error: true,
+                message: "Cannot perform operation. Please refresh the page and try again."
+            }
+        }
+
+        try{
+            const req = await fetch(`https://api.fmsatiya.live/delete-file?&file-id=${fileId}`)
+            const res = await req.json()
+            if(res.error){
+                return{
+                    error: true,
+                    message: res.error
+                }
+            }
+        }
+        catch(e){
+            return{
+                error: true,
+                message: "Service could not be reached. Please try again later."
+            }
+        }
     }
 };

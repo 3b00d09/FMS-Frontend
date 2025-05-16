@@ -1,37 +1,50 @@
 <script lang="ts">
-  let {isOpen = $bindable(), user} = $props();
-  let inputValue = $state("");
-  
-  function closeDialog(e?: MouseEvent) {
-    // to stop the input div from picking up the onclick 
-    if(e?.currentTarget === e?.target){
-        isOpen = false;
+    import { getToastState } from "./Toast.svelte";
+    let {isOpen = $bindable(), user} = $props();
+    let inputValue = $state("");
+    const toastState = getToastState()
+    
+    function closeDialog(e?: MouseEvent) {
+        // to stop the input div from picking up the onclick 
+        if(e?.currentTarget === e?.target){
+            isOpen = false;
+        }
     }
-  }
-  
-  async function handleSubmit() {
-    if(inputValue === "")return;
+    
+    async function handleSubmit() {
+        if(inputValue === "")return;
 
-    const data = {
-        Name: inputValue,
-        Creator_id: user
-    }
+        const data = {
+            Name: inputValue,
+        }
 
-    const req = await fetch("/api/add-org",{
-        method:"Post",
-        headers:{
-            "Content-Type": "application/json"
-        },
-        body:JSON.stringify(data)
-    })
-    const res = await req.json()
-    console.log(res)
+        const req = await fetch("https://api.fmsatiya.live/add-org",{
+            method:"Post",
+            credentials:"include",
+            headers:{
+                "Content-Type": "application/json"
+            },
+            body:JSON.stringify(data)
+        })
+        if(req.status != 200){
+            const res = await req.json()
+            toastState.triggerToast(res.error, "error", 3000)
+        }
+        else{
+            toastState.triggerToast("Org Created Successfully", "success", 2000)
+            // wait for the toast to go away before reloading the page to get the new data + close dialog
+            // since this is not a form with use:enhance, the data isn't automatically refreshed so a page reload is required
+            setTimeout(() => {
+                isOpen = false;
+                window.location.reload()
+            }, 2000);
+        }
   }
 
 </script>
 
 <!--Look into shadcn svelte for a dialog component-->
-<dialog open={isOpen} class="w-full h-full p-0 m-0 bg-black/50 backdrop-blur-sm">
+<dialog open={isOpen} class="fixed inset-0 p-0 m-0 w-full h-full overflow-hidden bg-black/50 backdrop-blur-sm">
     <!-- svelte-ignore a11y_click_events_have_key_events -->
     <!-- svelte-ignore a11y_no_static_element_interactions -->
     <!--try moving the form to another component and make the container a button-->

@@ -2,7 +2,7 @@
 	import type { folderData } from "$lib/types";
     import { formatDate } from "$lib/helpers";
 
-    let {folder, parentFolders}:{folder: folderData, parentFolders: string[]} = $props()
+    let {folder, parentFolders, canEdit}:{folder: folderData, parentFolders: string[], canEdit: boolean} = $props()
     let url = parentFolders.join("/")
 
 </script>
@@ -17,9 +17,11 @@
     <p>{formatDate(folder.createdAt)}</p>
     <p>{folder.uploader}</p>
     <p>nill</p>
-    <div class="flex gap-2">
-        <button aria-label="Delete File" class="text-red-400 hover:text-red-300">
-            <i class="fas fa-trash"></i>
-        </button>
-    </div>
+    {#if canEdit}
+        <div class="flex gap-2">
+            <button aria-label="Delete File" class="text-red-400 hover:text-red-300">
+                <i class="fas fa-trash"></i>
+            </button>
+        </div>
+    {/if}
 </a>

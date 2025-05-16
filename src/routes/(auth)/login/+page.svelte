@@ -4,8 +4,11 @@
     import type { PageProps } from './$types';
 
     let {form}: PageProps = $props();
+    // toastState is a global state class that is used to display error or success messages
     const toastState = getToastState();
 
+    // every time the value of form changes, this effect recomputes and checks for error or success
+    // with login, success is implied by redirect
     $effect(()=>{
         if(form?.error){
             toastState.triggerToast(form.message, "error", 3000)
