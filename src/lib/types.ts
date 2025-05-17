@@ -19,7 +19,8 @@ export type folderData = {
     uploader: string,
     name: string,
     parentFolderId: number | null,
-    createdAt: string
+    createdAt: string, 
+    size: number,
 }
 
 export type fileData = {

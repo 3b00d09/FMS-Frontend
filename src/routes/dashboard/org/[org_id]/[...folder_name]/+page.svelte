@@ -1,14 +1,14 @@
 <script lang="ts">
-	import FolderColumn from "$lib/components/FolderColumn.svelte";
-    import { enhance } from "$app/forms";
 	import UploadFileForm from "$lib/components/UploadFileForm.svelte";
     import {page} from "$app/state"
-	import FileColumn from "$lib/components/FileColumn.svelte";
 	import { formatSize } from "$lib/helpers.js";
     import { getToastState } from "$lib/components/Toast.svelte.js";
+	import UploadFolderForm from "$lib/components/UploadFolderForm.svelte";
+	import FolderRow from "$lib/components/FolderRow.svelte";
+	import FileRow from "$lib/components/FileRow.svelte";
 
     let { data, form } = $props();
-    let showUpload = $state(false);
+    let showFileUpload = $state(false);
     let showFolderUpload = $state(false);
     let breadCrumbs = $derived(page.url.pathname.split("/").splice(4));
 
@@ -17,6 +17,9 @@
     $effect(()=>{
         if(form?.error){
             toastState.triggerToast(form.message, "error", 3000)
+        }
+        if(form?.success){
+            toastState.triggerToast(form.message, "success", 2000)
         }
     })
   
@@ -52,16 +55,16 @@
 
     {#if data.role.toLocaleLowerCase() === "editor" || data.role.toLocaleLowerCase() === "owner"}
         <div class="flex flex-wrap gap-3">
-            <button onclick={()=>showUpload = !showUpload} class="bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded-lg flex items-center">
+            <button onclick={()=>{showFileUpload = !showFileUpload; showFolderUpload = false}} class="bg-secondary p-2 rounded-md font-semibold">
                 <i class="fas fa-upload mr-2"></i>
                 Upload File
             </button>
-            <button onclick={()=>showFolderUpload = !showFolderUpload} class="bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded-lg flex items-center">
+            <button onclick={()=>{showFolderUpload = !showFolderUpload; showFileUpload = false}} class="bg-secondary p-2 rounded-md font-semibold">
                 <i class="fas fa-folder-plus mr-2"></i>
                 Add Folder
             </button>
             {#if data.role.toLocaleLowerCase() === "owner"}
-                <a href={`/dashboard/org/${data.org.id}/settings`} class="bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded-lg flex items-center">
+                <a href={`/dashboard/org/${data.org.id}/settings`} class="bg-secondary p-2 rounded-md font-semibold">
                     <i class="fas fa-gear mr-2"></i>
                     Settings
                 </a>
@@ -74,15 +77,11 @@
     {/if}
 
     {#if showFolderUpload}
-        <form use:enhance method="POST" action="?/uploadFolder">
-            <input type="text" name="folder-name">
-            <input type="hidden" name="org-id" value={data.org.id}>
-            <button type="submit">Submit</button>
-        </form>
+        <UploadFolderForm orgId={data.org.id}/>
     {/if}
 
-    {#if showUpload}
-        <UploadFileForm orgId={data.org.id}/>
+    {#if showFileUpload}
+        <UploadFileForm/>
     {/if}
 
     <div class="flex justify-end items-center">
@@ -113,13 +112,13 @@
 
     {#if data.folderData}
         {#each data.folderData as folder (folder.id)}
-            <FolderColumn folder={folder} parentFolders={data.parentFolders} canEdit={data.role.toLocaleLowerCase() === "editor" || data.role.toLocaleLowerCase() === "owner"}/>
+            <FolderRow folder={folder} parentFolders={data.parentFolders} canEdit={data.role.toLocaleLowerCase() === "editor" || data.role.toLocaleLowerCase() === "owner"}/>
         {/each}
     {/if}
 
     {#if data.fileData}
         {#each data.fileData as file (file.id)}
-            <FileColumn file={file} canEdit={data.role.toLocaleLowerCase() === "editor" || data.role.toLocaleLowerCase() === "owner"}/>
+            <FileRow file={file} canEdit={data.role.toLocaleLowerCase() === "editor" || data.role.toLocaleLowerCase() === "owner"}/>
         {/each}
     {/if}
 {/if}

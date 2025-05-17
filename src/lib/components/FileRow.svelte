@@ -2,10 +2,20 @@
 	import type { fileData } from "$lib/types";
     import { formatDate, formatSize, stripFileType } from "$lib/helpers";
 	import { enhance } from "$app/forms";
-	import { getToastState } from "./Toast.svelte";
-	import type { ActionData } from "../../routes/$types";
+	import type { SubmitFunction } from "@sveltejs/kit";
     let {file, canEdit}: {file:fileData, canEdit: boolean} = $props();
 
+    let isDeleting = $state(false)
+    
+    const customEnhance: SubmitFunction = ({}) => {
+        isDeleting = true;
+                
+        return async ({ update }) => {
+            await update();
+            // in case deleting fails then this row wouldn't vanish
+            isDeleting = false;
+        };
+    };
 </script>
 
 
@@ -23,11 +33,12 @@
             <i class="fas fa-download"></i>
         </button>
         {#if canEdit}
-            <form use:enhance action="?/deleteFile" method="POST">
-                <button type="submit" aria-label="Delete File" class="text-red-400 hover:text-red-300">
+            <form use:enhance={customEnhance} action="?/deleteFile" method="POST">
+                <button disabled={isDeleting} type="submit" aria-label="Delete File" class="text-red-400 hover:text-red-300 disabled:text-gray-900">
                     <i class="fas fa-trash"></i>
                 </button>
                 <input type="hidden" name="file-id" value={file.id}/>
+                <input type="hidden" name="org-id" value={file.orgId}/>
             </form>
         {/if}
         </div>

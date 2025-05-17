@@ -8,16 +8,21 @@
     // to stop the input div from picking up the onclick 
     if(e?.currentTarget === e?.target){
         isOpen = false;
+        users = []
+        inputValue = ""
     }
   }
 
   async function searchUsers(){
+    console.log(inputValue.trim())
+    if(inputValue.trim().length === 0) return
     try{
         const req = await fetch(`https://api.fmsatiya.live/users?username=${inputValue}`,{
             credentials:"include"
         })
         const res = await req.json()
-        users = res.users
+        if(res.users) users = res.users
+        else users = []
     }
     catch(e){
         console.log(e)
