@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { getToastState } from "./Toast.svelte";
+    import { getToastState } from "../Toast.svelte";
     let {isOpen = $bindable()} = $props();
     let inputValue = $state("");
     const toastState = getToastState()

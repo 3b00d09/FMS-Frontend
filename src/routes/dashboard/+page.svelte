@@ -1,8 +1,8 @@
 <script lang="ts">
     import type { LayoutProps } from './$types';
-	import OwnedOrg from '$lib/components/OwnedOrg.svelte';
-	import JoinedOrg from '$lib/components/JoinedOrg.svelte';
-	import AddOrgDialog from '$lib/components/AddOrgDialog.svelte';
+	import OwnedOrg from '$lib/components/dashboard/OwnedOrg.svelte';
+	import JoinedOrg from '$lib/components/dashboard/JoinedOrg.svelte';
+	import AddOrgDialog from '$lib/components/dashboard/AddOrgDialog.svelte';
     let { data } = $props();
     let isOpen = $state(false);
 </script>

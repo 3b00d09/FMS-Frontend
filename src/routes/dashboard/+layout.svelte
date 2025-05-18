@@ -1,6 +1,6 @@
 <script>
-	import DashboardLink from "$lib/components/DashboardLink.svelte";
-    let {data, children} = $props();
+	import DashboardLink from "$lib/components/dashboard/DashboardLink.svelte";
+    let {children} = $props();
 </script>
 
 <div class="flex h-screen w-full overflow-hidden">
@@ -17,6 +17,7 @@
             <div class="flex flex-col gap-2 mt-12">
                 <DashboardLink text="Dashboard" link="/dashboard" icon="" />
                 <DashboardLink text="Notifications" link="/dashboard/notifications" icon="" />
+                <DashboardLink text="Invites" link="/dashboard/invites" icon=""/>
                 <DashboardLink text="Account Settings" link="/dashboard" icon="" />
             </div>
             
@@ -31,7 +32,7 @@
             <h2 class="text-primary text-5xl font-playfair">Welcome {'data.user.username'}</h2>
             <!-- <button onclick={()=>isOpen = true} class="bg-secondary text-white rounded-md p-4 flex gap-2 text-xl"><span>+</span>Create Organisation</button> -->
         </div>
-        <section class="flex flex-col gap-16 mt-16">
+        <section class="flex flex-col gap-12 mt-16">
             {@render children()}
         </section>
     </section>

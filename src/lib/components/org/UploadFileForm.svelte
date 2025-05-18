@@ -1,7 +1,7 @@
 <script lang="ts">
     import { enhance } from "$app/forms";
 	import type { SubmitFunction } from "@sveltejs/kit";
-    import { getToastState } from "./Toast.svelte";
+    import { getToastState } from "../Toast.svelte";
 	import { allowedFileTypes, invalidChars, maxFileSize } from "$lib/helpers";
     let file = $state<File|null>(null);
     // variable to enable / disable upload button

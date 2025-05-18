@@ -7,7 +7,7 @@ export const load = async({fetch, params}) =>{
         const req = await fetch(`https://api.fmsatiya.live/view-org?org_id=${orgId}`)
         if(req.status !== 202){
             console.log("kaboom")
-            return redirect(303, "/dashboard")
+            return redirect(301, "/dashboard")
         }
         const res = await req.json()
         return{

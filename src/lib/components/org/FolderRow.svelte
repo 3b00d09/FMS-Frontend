@@ -36,6 +36,7 @@
             </button>
             <input type="hidden" name="folder-id" value={folder.id}/>
             <input type="hidden" name="org-id" value={folder.orgId}/>
+            <input type="hidden" name="folder-name" value={folder.name}/>
         </form>
     {/if}
 </a>

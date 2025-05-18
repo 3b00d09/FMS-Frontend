@@ -47,3 +47,14 @@ export type organisationMember = {
     role: string,
     joinedAt: string,
 }
+
+export type notificationData = {
+    id: number,
+    orgName: string,
+    actorName: string,
+    message: string,
+    payloadName: string,
+    isRead: boolean,
+    createdAt: string,
+    notifType: string,
+}

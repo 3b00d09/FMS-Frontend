@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { redirect } from "@sveltejs/kit";
-    import { getToastState } from "./Toast.svelte";
-    let {username, isLastRow} = $props()
+    import { getToastState } from "../Toast.svelte";
+    let {username, isLastRow, orgId} = $props()
     let isInviting = $state(false)
     const toastState = getToastState()
 
     async function inviteUser(){
         isInviting = true;
         try{
-            const req = await fetch(`https://api.fmsatiya.live/invite-user?username=${username}`,{
+            const req = await fetch(`https://api.fmsatiya.live/invite-user?username=${username}&org-id=${orgId}`,{
             credentials:"include"
             })
 

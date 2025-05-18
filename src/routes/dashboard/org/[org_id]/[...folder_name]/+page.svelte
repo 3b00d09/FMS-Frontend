@@ -1,11 +1,11 @@
 <script lang="ts">
-	import UploadFileForm from "$lib/components/UploadFileForm.svelte";
+	import UploadFileForm from "$lib/components/org/UploadFileForm.svelte";
     import {page} from "$app/state"
 	import { formatSize } from "$lib/helpers.js";
     import { getToastState } from "$lib/components/Toast.svelte.js";
-	import UploadFolderForm from "$lib/components/UploadFolderForm.svelte";
-	import FolderRow from "$lib/components/FolderRow.svelte";
-	import FileRow from "$lib/components/FileRow.svelte";
+	import UploadFolderForm from "$lib/components/org/UploadFolderForm.svelte";
+	import FolderRow from "$lib/components/org/FolderRow.svelte";
+	import FileRow from "$lib/components/org/FileRow.svelte";
 
     let { data, form } = $props();
     let showFileUpload = $state(false);

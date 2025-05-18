@@ -1,7 +1,7 @@
 <script lang="ts">
     import { enhance } from "$app/forms";
 	import type { SubmitFunction } from "@sveltejs/kit";
-	import { getToastState } from "./Toast.svelte";
+	import { getToastState } from "../Toast.svelte";
 	import { invalidChars } from "$lib/helpers";
     let {orgId} = $props()
     let folderName = $state("");
@@ -25,8 +25,7 @@
             toastState.triggerToast("folder name cannot be root", "error", 3000)
             return false;
         }
-        
-        // Check if folder name is too long
+
         if (name.length > 255) {
             toastState.triggerToast("Folder name is too long", "error", 3000);
             return false;
@@ -35,7 +34,6 @@
         return true;
     }
     
-    // Custom enhance function to handle form submission
     const customEnhance: SubmitFunction = ({ formData, cancel }) => {
         const name = formData.get("folder-name") as string;
         

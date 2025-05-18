@@ -39,6 +39,7 @@
                 </button>
                 <input type="hidden" name="file-id" value={file.id}/>
                 <input type="hidden" name="org-id" value={file.orgId}/>
+                <input type="hidden" name="file-name" value={file.name}/>
             </form>
         {/if}
         </div>

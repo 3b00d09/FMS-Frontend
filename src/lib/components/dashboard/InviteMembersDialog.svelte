@@ -2,7 +2,7 @@
 	import InviteMemberRow from "./InviteMemberRow.svelte";
 
 
-  let {isOpen = $bindable()} = $props();
+  let {isOpen = $bindable(), orgId} = $props();
   let inputValue = $state("");
   let users:string[] = $state([]);
   
@@ -54,7 +54,7 @@
             {#if users.length > 0}
                 <div class="max-h-60 overflow-y-auto">
                     {#each users as user, i}
-                        <InviteMemberRow username={user} isLastRow={i < users.length - 1}/>
+                        <InviteMemberRow username={user} isLastRow={i < users.length - 1} {orgId}/>
                     {/each}
                 </div>
             {/if}

@@ -265,7 +265,8 @@ export const actions: Actions = {
         const data = await request.formData()
         const fileId = data.get("file-id")
         const orgId = data.get("org-id")
-        if(!fileId || !orgId){
+        const fileName = data.get("file-name")
+        if(!fileId || !orgId || !fileId){
             return{
                 error: true,
                 message: "Cannot perform operation. Please refresh the page and try again."
@@ -273,7 +274,7 @@ export const actions: Actions = {
         }
 
         try{
-            const req = await fetch(`https://api.fmsatiya.live/delete-file?org-id=${orgId}&file-id=${fileId}`,{
+            const req = await fetch(`https://api.fmsatiya.live/delete-file?org-id=${orgId}&file-id=${fileId}&file-name=${fileName}`,{
                 method: "DELETE"
             })
             // success
@@ -310,7 +311,8 @@ export const actions: Actions = {
         const data = await request.formData()
         const folderId = data.get("folder-id")
         const orgId = data.get("org-id")
-        if(!folderId || !orgId){
+        const folderName = data.get("folder-name")
+        if(!folderId || !orgId || !folderName){
             return{
                 error: true,
                 message: "Cannot perform operation. Please refresh the page and try again."
@@ -318,7 +320,7 @@ export const actions: Actions = {
         }
 
         try{
-            const req = await fetch(`https://api.fmsatiya.live/delete-folder?org-id=${orgId}&folder-id=${folderId}`,{
+            const req = await fetch(`https://api.fmsatiya.live/delete-folder?org-id=${orgId}&folder-id=${folderId}&folder-name=${folderName}`,{
                 method: "DELETE"
             })
             // success

@@ -1,4 +1,4 @@
-import type { notificationData } from '$lib/types.js'
+import type { inviteData } from '$lib/types.js'
 import { redirect } from '@sveltejs/kit'
 import type { PageServerLoad } from './$types.js'
 
@@ -7,17 +7,16 @@ export const load: PageServerLoad = async({fetch, locals})=>{
         return redirect(301, "/login")
     }
 
-    let notifications: notificationData[] | null = null
-
+    let invites:inviteData[] | null = null
     try{
-        const req2 = await fetch("https://api.fmsatiya.live/notifications")
-        const res2 = await req2.json()
-        if(req2.status === 200){
-            notifications = res2.notifications
+        const req = await fetch("https://api.fmsatiya.live/user-invites")
+        const res = await req.json()
+        if(req.status === 202){
+            invites = res.invites
         }
-        
+
         return{
-            notifications,
+            invites,
         }
     }
     catch(e){
