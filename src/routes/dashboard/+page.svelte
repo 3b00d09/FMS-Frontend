@@ -21,7 +21,7 @@
 <div class="flex flex-col gap-12">
     <h2 class="text-primary text-4xl font-semibold">Joined Organisations</h2>
     {#if data.joinedOrgs}
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:w-3/5">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 md:w-3/5">
             {#each data.joinedOrgs as joinedOrg}
                 <JoinedOrg {joinedOrg}/>
             {/each}
