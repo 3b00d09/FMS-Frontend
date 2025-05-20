@@ -172,11 +172,11 @@ export const actions: Actions = {
             }
         }
         
-        // invalid characters cause conflict
-        if (invalidChars.test(folderName)) {
+        // folder names must be alpha numeric to prevent url complications when navigating the folder tree
+        if (!/^[a-zA-Z0-9 ]+$/.test(folderName)) {
             return{
                 error: true,
-                message: "Folder name contains invalid characters"
+                message: "Folder name must be alphanumeric"
             }
         }
 
@@ -189,10 +189,10 @@ export const actions: Actions = {
         }
         
         // check if folder name is too long
-        if (folderName.length > 255) {
+        if (folderName.length > 13) {
             return{
                 error: true,
-                message: "Folder name is too long"
+                message: "Folder name is too long. Max length is 13 characters"
             }
         }
 

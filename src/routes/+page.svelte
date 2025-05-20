@@ -13,7 +13,6 @@
         <p class="text-2xl font-semibold font-sans text-white">FMS</p>
     </div>
     <div class="space-x-4">
-        <a class="text-2xl" href="/">Features</a>
         {#if data.user}
             <a href="/dashboard"><button class="bg-secondary text-xl rounded-md py-2 px-6">Dashboard</button></a>
         {:else}
@@ -25,7 +24,6 @@
 <section class="container mx-auto px-6 py-16 text-center">
     <h1 class="text-5xl font-playfair mb-6">Secure Cloud Storage <span class="text-accent">for Your Team</span></h1>
     <p class="text-xl mb-10 max-w-2xl mx-auto">Securely store, share, and collaborate on files with intuitive team management.</p>
-    <button class="bg-secondary font-medium text-lg rounded-md px-8 py-3">Get Started</button>
 </section>
 
 <section class="bg-formBg py-16">

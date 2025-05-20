@@ -16,6 +16,20 @@
             isDeleting = false;
         };
     };
+    async function downloadFile() {
+        try {
+            // to download files we don't use fetch, we have to open a blank window with the download url
+            // files with special but not illegal characters are causing problems with how the name is being parsed
+            const encodedFileName = encodeURIComponent(file.name)
+            const url = `https://api.fmsatiya.live/download-file?org-id=${file.orgId}&file-id=${file.id}&file-name=${encodedFileName}&file-type=${file.type.slice(1)}`;
+            
+            // this will trigger the browser's download behavior
+            window.open(url, '_blank');
+            
+        } catch (e) {
+            console.error("Failed to initiate download:", e);
+        }
+    }
 </script>
 
 
@@ -29,7 +43,7 @@
     <p>{file.uploader}</p>
     <p>{formatSize(file.size)}</p>
     <div class="flex gap-2">
-        <button aria-label="Download File" class="text-blue-400 hover:text-blue-300">
+        <button onclick={downloadFile} aria-label="Download File" class="text-blue-400 hover:text-blue-300">
             <i class="fas fa-download"></i>
         </button>
         {#if canEdit}
