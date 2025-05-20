@@ -45,7 +45,7 @@
 </script>
 <div class="flex justify-between items-center w-full p-4" class:border-b={isLastRow} class:border-[#2d3748]={isLastRow}>
     <p class="text-gray-300">{username}</p>
-    <button disabled={isInviting} onclick={inviteUser} class="bg-secondary rounded-md py-1 px-4 text-white focus:outline-none focus:ring-2 focus:ring-pink-500 disabled:bg-gray-600 disabled:opacity-50">
+    <button disabled={isInviting} onclick={inviteUser} class="bg-secondary rounded-md py-1 px-4 text-white focus:outline-none focus:ring-2 focus:ring-pink-500 ">
         Invite
     </button>
 </div>

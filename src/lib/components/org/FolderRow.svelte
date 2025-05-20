@@ -31,7 +31,7 @@
     <p>{formatSize(folder.size)}</p>
     {#if canEdit}
         <form use:enhance={customEnhance} action="?/deleteFolder" method="POST">
-            <button onclick={(e) => e.stopPropagation()} disabled={isDeleting} type="submit" aria-label="Delete File" class="text-red-400 hover:text-red-300 disabled:text-gray-900">
+            <button onclick={(e) => e.stopPropagation()} disabled={isDeleting} type="submit" aria-label="Delete File" class="text-red-400 hover:text-red-300">
                 <i class="fas fa-trash"></i>
             </button>
             <input type="hidden" name="folder-id" value={folder.id}/>

@@ -75,7 +75,7 @@
         <button 
             disabled={isCreating} 
             type="submit" 
-            class="flex-grow bg-purple-600 hover:bg-purple-700 text-white py-3 px-4 rounded-lg flex justify-center items-center transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 disabled:bg-gray-600 disabled:opacity-50"
+            class="flex-grow bg-purple-600 hover:bg-purple-700 text-white py-3 px-4 rounded-lg flex justify-center items-center transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 "
         >
             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path>

@@ -34,7 +34,7 @@
         </button>
         {#if canEdit}
             <form use:enhance={customEnhance} action="?/deleteFile" method="POST">
-                <button disabled={isDeleting} type="submit" aria-label="Delete File" class="text-red-400 hover:text-red-300 disabled:text-gray-900">
+                <button disabled={isDeleting} type="submit" aria-label="Delete File" class="text-red-400 hover:text-red-300">
                     <i class="fas fa-trash"></i>
                 </button>
                 <input type="hidden" name="file-id" value={file.id}/>

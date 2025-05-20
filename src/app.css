@@ -2,6 +2,15 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+
+@layer base {
+  /* target disabled buttons and apply the exact same utilities */
+  /* saves me from having to add these classes to every button as every disabled button should look the same */
+  button:disabled {
+    @apply bg-gray-600 opacity-50;
+  }
+}
+
 *{
     margin: 0;
     padding: 0;

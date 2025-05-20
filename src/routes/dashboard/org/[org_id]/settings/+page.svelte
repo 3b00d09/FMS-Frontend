@@ -1,9 +1,13 @@
 <script lang="ts">
 	import { formatSize } from "$lib/helpers";
     import { getToastState } from "$lib/components/Toast.svelte";
+	import OrgMember from "$lib/components/org-settings/OrgMember.svelte";
+	import { isRedirect } from "@sveltejs/kit";
+	import { goto } from "$app/navigation";
 
     let {data} = $props();
     let enableSaveButton: boolean = $state(false)
+    let enableDeleteButton: boolean = $state(true)
     let originalOrgName: string | undefined = $state(data.ownedOrg?.name)
     let orgInputValue: string | undefined = $state(data.ownedOrg?.name)
     const toastState = getToastState()
@@ -16,7 +20,43 @@
     }
 
     async function deleteOrg(){
+        enableDeleteButton = false;
 
+        try {
+            const req = await fetch('https://api.fmsatiya.live/delete-org', {
+                method: 'DELETE',
+                credentials: 'include'
+            })
+
+            if (req.status === 200) {
+                toastState.triggerToast('org deleted successfully', 'success', 1500)
+                // after toast
+                setTimeout(() => {
+                goto('/dashboard', { replaceState: true })
+                }, 1500)
+            }
+            else if (req.status === 401) {
+                goto('/login', { replaceState: true })
+            }
+            else {
+                const res = await req.json()
+                console.log(res)
+                toastState.triggerToast(
+                'unable to delete org. please try again later',
+                'error',
+                2000
+                )
+                enableDeleteButton = true
+            }
+        }
+
+        catch(e){
+            if (isRedirect(e)){
+                throw e
+            }
+            enableDeleteButton = true
+            toastState.triggerToast("unable to reach service. please try again later", "error", 25000)
+        }
     }
 
     async function changeOrgName(){
@@ -56,7 +96,7 @@
         </div>
                 
         <div class="flex justify-end">
-            <button onclick={changeOrgName} disabled={!enableSaveButton} class="bg-secondary p-2 rounded-md font-semibold disabled:bg-gray-600 disabled:opacity-50">Save Changes</button>
+            <button onclick={changeOrgName} disabled={!enableSaveButton} class="bg-secondary p-2 rounded-md font-semibold ">Save Changes</button>
         </div>
         
         <div class="mb-6">
@@ -80,21 +120,15 @@
         </div>
         
         <div class="mb-6">
-            <div class="flex mb-2 py-2 border-b border-gray-700">
-                <div class="w-1/4 font-medium">Member</div>
-                <div class="w-1/4 font-medium">Role</div>
+            <div class="grid grid-cols-4 gap-2 items-center border-b border-gray-700">
+                <div class="font-medium">Member</div>
+                <div class="font-medium">Role</div>
+                <div class="font-medium">Joined At</div>
+                <div class="font-medium">Actions</div>
             </div>
             {#if data.members}
                 {#each data.members as member}
-                    <div class="flex py-3 items-center border-b border-gray-700">
-                        <div class="w-1/4 flex items-center">
-                            <div class="w-8 h-8 text-sm font-medium">{member.username}</div>
-                        </div>
-                        <div class="w-1/4">
-                            <span class="badge-creator px-3 py-1 rounded-full text-sm">{member.role}</span>
-                        </div>
-                        <button class="bg-red-600 hover:bg-red-700 text-sm text-white px-3 py-1 rounded">Remove Member</button>
-                    </div>
+                    <OrgMember {member}/>
                 {/each}
             {/if}
         </div>
@@ -113,7 +147,7 @@
                         <div class="font-medium">Delete Organisation</div>
                         <div class="text-sm text-gray-400">Permanently delete this organisation and all its data</div>
                     </div>
-                    <button class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded">Delete Org</button>
+                    <button class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded" disabled={!enableDeleteButton} onclick={deleteOrg}>Delete Org</button>
                 </div>
             </div>
         </div>

@@ -68,10 +68,10 @@
         </div>
 
         <div class="mt-3 flex">
-            <button disabled={isSubmitting} onclick={acceptInvite} class="disabled:bg-gray-600 disabled:opacity-50 bg-purple-600 hover:bg-purple-700 text-white text-sm py-1.5 px-4 rounded-lg transition-colors duration-200 mr-2">
+            <button disabled={isSubmitting} onclick={acceptInvite} class="bg-purple-600 hover:bg-purple-700 text-white text-sm py-1.5 px-4 rounded-lg transition-colors duration-200 mr-2">
                 Accept
             </button>
-            <button disabled={isSubmitting} onclick={declineInvite} class="disabled:bg-gray-600 disabled:opacity-50 bg-gray-700 hover:bg-gray-600 text-white text-sm py-1.5 px-4 rounded-lg transition-colors duration-200">
+            <button disabled={isSubmitting} onclick={declineInvite} class="bg-gray-700 hover:bg-gray-600 text-white text-sm py-1.5 px-4 rounded-lg transition-colors duration-200">
                 Decline
             </button>
         </div>

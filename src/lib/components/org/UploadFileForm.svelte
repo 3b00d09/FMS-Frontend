@@ -83,7 +83,7 @@
 
     {#if file}
         <div class="flex items-center justify-between">
-            <button disabled={isUploading} type="submit" class="flex-grow bg-purple-600 hover:bg-purple-700 text-white py-3 px-4 rounded-lg flex justify-center items-center transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 disabled:bg-gray-600 disabled:opacity-50">
+            <button disabled={isUploading} type="submit" class="flex-grow bg-purple-600 hover:bg-purple-700 text-white py-3 px-4 rounded-lg flex justify-center items-center transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
                 </svg>
