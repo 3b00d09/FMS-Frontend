@@ -13,6 +13,7 @@
         <p class="text-2xl font-semibold font-sans text-white">FMS</p>
     </div>
     <div class="space-x-4">
+        <a href="/user-guide">User Guide</a>
         {#if data.user}
             <a href="/dashboard"><button class="bg-secondary text-xl rounded-md py-2 px-6">Dashboard</button></a>
         {:else}
