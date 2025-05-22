@@ -46,7 +46,7 @@
 <div class="flex justify-between items-center">
     <h1 class="text-2xl font-semibold">Notifications</h1>
     
-    <button onclick={markAllAsRead} class="text-sm bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg transition-colors duration-200">
+    <button onclick={markAllAsRead} class="text-sm bg-secondary  hover:bg-purple-700 text-white px-4 py-2 rounded-lg transition-colors duration-200">
         Mark all as read
     </button>
 </div>
@@ -56,14 +56,14 @@
     <button onclick={()=>{showUnread = true; showAll = false;}}
         class="px-4 py-2 mr-4 font-medium text-sm transition-colors duration-200 relative" class:opacity-100={showUnread} class:opacity-50={!showUnread}>
         Unread
-        <div class="absolute bottom-0 left-0 w-full h-0.5" class:block={showUnread} class:bg-purple-500={showUnread}></div>
+        <div class="absolute bottom-0 left-0 w-full h-0.5" class:block={showUnread} class:bg-secondary={showUnread}></div>
     </button>
 
     <button 
         onclick={()=>{showUnread = false; showAll = true;}}
         class="px-4 py-2 mr-4 font-medium text-sm transition-colors duration-200 relative" class:opacity-100={showAll} class:opacity-50={!showAll}>
         All
-        <div class="absolute bottom-0 left-0 w-full h-0.5" class:block={showAll} class:bg-purple-500={showAll}></div>
+        <div class="absolute bottom-0 left-0 w-full h-0.5" class:block={showAll} class:bg-secondary={showAll}></div>
     </button>
 </div>
 

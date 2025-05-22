@@ -27,9 +27,9 @@
         </div>
         <div class="flex flex-col gap-4 items-start mt-10 w-full">
             <label for="username" class="text-white">Username</label>
-            <input name="username" placeholder="Username" type="text" class="w-full bg-background rounded-sm text-white outline-none focus:outline-secondary h-8 p-2">
+            <input required name="username" placeholder="Username" type="text" class="w-full bg-background rounded-sm text-white outline-none focus:outline-secondary h-8 p-2">
             <label for="password" class="text-white">Password</label>
-            <input name="password" placeholder="********" type="password" class="w-full bg-background rounded-sm text-white outline-none focus:outline-secondary h-8 p-2">
+            <input required name="password" placeholder="********" type="password" class="w-full bg-background rounded-sm text-white outline-none focus:outline-secondary h-8 p-2">
             <button class="text-black font-medium w-full bg-primary p-2 rounded-md mt-4 text-lg" type="submit">Log In</button>
             <p class="self-center text-white pt-4">Don't have an account? <a href="/register" class="text-accent">Sign Up!</a></p>
         </div>

@@ -16,7 +16,7 @@ export const actions: Actions = {
 		const password = data.get('password') as string;
 
 		// basic field validation check
-		if(password.length === 0 || username.length === 0){
+		if(password.trim().length === 0 || username.trim().length === 0){
 			return{
 				error: true,
 				message: "Mandatory fields required."
@@ -51,6 +51,7 @@ export const actions: Actions = {
 			}
 
 			// at this point there are no errors so the session cookie is set
+			// api returns expiry in seconds but new Date() take milliseconds so we convert by *1000
 			cookies.set("session_token", res.session.ID, {
 				path:"/",
 				expires:new Date(res.session.ExpiresAt * 1000),

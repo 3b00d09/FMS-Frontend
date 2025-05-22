@@ -109,11 +109,13 @@ export const actions: Actions = {
                 method:"POST",
                 body: backendFormData
             })
-            // 400 means the form data was incorrect
+            // 400 means the submitted data is not acceptable by the server
+            // the server returns an error message with this response status so we can parse it and display the error to the user
             if (req.status === 400){
+                const res = await req.json()
                 return{
                     error: true,
-                    message: "File upload failed. Please refresh the page and try again"
+                    message: res.error
                 }
             }
             // server returns 409 if a file name already exists in the current location
@@ -188,14 +190,16 @@ export const actions: Actions = {
             }
         }
         
-        // check if folder name is too long
-        if (folderName.length > 13) {
+        // check if folder name is too long or too short
+        if (folderName.length > 13 || folderName.length < 3) {
             return{
                 error: true,
-                message: "Folder name is too long. Max length is 13 characters"
+                message: "Folder name must be between 3 and 13 characters"
             }
         }
 
+        // folder name cannot be the same as parent folder because it will cause issues navigating the folder tree
+        // foo/foo will render incorrect data as data is fetched by folder name not id
         if (folderName === parentFolderName[parentFolderName.length - 1]){
             return{
                 error: true,
@@ -219,7 +223,7 @@ export const actions: Actions = {
                     message: "You do not have permission to carry out this operation"
                 }
             }
-            // server returns 409 if a file name already exists in the current location
+            // server returns 409 if a folder name already exists in the current location
             else if (req.status === 409){
                 return{
                     error: true,
@@ -231,6 +235,15 @@ export const actions: Actions = {
                 return{
                     error: true,
                     message: "you do not have permission to carry out this operation"
+                }
+            }
+
+            // there was a problem with the folder's name
+            else if (req.status === 400){
+                const res = await req.json()
+                return{
+                    error: true,
+                    message: res.error
                 }
             }
             // success

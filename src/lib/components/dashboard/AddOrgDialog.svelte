@@ -14,8 +14,14 @@
     async function handleSubmit() {
         if(inputValue === "")return;
 
+        
         const data = {
-            Name: inputValue,
+            Name: inputValue.trim(),
+        }
+        
+        if(data.Name.length < 3 || data.Name.length > 12){
+            toastState.triggerToast("Organisation name must be between 3 and 12 characters", "error", 3000)
+            return
         }
 
         const req = await fetch("https://api.fmsatiya.live/add-org",{
@@ -43,22 +49,18 @@
 
 </script>
 
-<!--Look into shadcn svelte for a dialog component-->
 <dialog open={isOpen} class="fixed inset-0 p-0 m-0 w-full h-full overflow-hidden bg-black/50 backdrop-blur-sm">
-    <!-- svelte-ignore a11y_click_events_have_key_events -->
-    <!-- svelte-ignore a11y_no_static_element_interactions -->
-    <!--try moving the form to another component and make the container a button-->
-    <div onclick={closeDialog} class="flex items-center justify-center h-full w-full">
-        <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+    <div onclick={closeDialog} role="button" tabindex={0} aria-label="Close Dialog" onkeydown={()=>closeDialog} class="flex items-center justify-center h-full w-full">
+        <div class="bg-[#111827] p-4 rounded-lg shadow-lg w-full max-w-md text-gray-200 overflow-hidden">
         <input 
             type="text" 
             bind:value={inputValue} 
-            class="w-full p-3 border border-gray-300 rounded-md" 
+            class="w-full bg-[#1f2937] border border-[#374151] rounded-md text-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" 
             placeholder="Type here..."
         />
         <div class="mt-4 flex justify-end">
             <button onclick={closeDialog} class="mr-2 px-4 py-2 border rounded-md">Cancel</button>
-            <button onclick={handleSubmit} class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Submit</button>
+            <button onclick={handleSubmit} class="bg-secondary rounded-md py-1 px-4 text-white focus:outline-none focus:ring-2 focus:ring-pink-500">Submit</button>
         </div>
         </div>
     </div>

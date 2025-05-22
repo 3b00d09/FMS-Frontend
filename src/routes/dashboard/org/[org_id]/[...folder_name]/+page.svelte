@@ -69,10 +69,6 @@
                     Settings
                 </a>
             {/if}
-            <div class="flex-grow"></div>
-            <div class="relative">
-                <input type="text" placeholder="Search..." class="w-full md:w-64 bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-            </div>
         </div>
     {/if}
 
@@ -84,28 +80,11 @@
         <UploadFileForm/>
     {/if}
 
-    <div class="flex justify-end items-center">
-        <div class="flex space-x-4">
-            <div class="relative">
-                <button class="bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg flex items-center">
-                    <span>File Type</span>
-                    <i class="fas fa-chevron-down ml-2"></i>
-                </button>
-            </div>
-            <div class="relative">
-                <button class="bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg flex items-center">
-                    <span>Sort By</span>
-                    <i class="fas fa-chevron-down ml-2"></i>
-                </button>
-            </div>
-        </div>
-    </div>
-
     <div class="grid grid-cols-6 border-b border-placeholderText p-2 rounded-md text-xl bg-gray-900">
         <p>Name</p>
         <p>Type</p>
-        <p>Uploaded At</p>
-        <p>Uploaded By</p>
+        <p class="truncate">Uploaded At</p>
+        <p class="truncate">Uploaded By</p>
         <p>Size</p>
         <p>Action</p>
     </div>

@@ -92,6 +92,21 @@ export const actions:Actions = {
                     message: "username updated succesfully",
                 }
             }
+            // username field has invalid data
+            else if (req.status === 422){
+                const res = await req.json()
+                return{
+                    error: true,
+                    message: res.error
+                }
+            }
+            // username is taken
+            else if(req.status===409){
+                return{
+                    error: true,
+                    message: "username taken"
+                }
+            }
             else if (req.status === 401){
                 return redirect(301, "/login")
             }

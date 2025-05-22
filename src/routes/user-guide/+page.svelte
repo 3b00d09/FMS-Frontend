@@ -28,124 +28,203 @@
 			<h2 class="mb-6 text-xl font-bold text-purple-300">Contents</h2>
 			<nav>
 				<ul class="space-y-4">
-					<li>
-						<a href="#introduction" class="block transition hover:text-purple-300">Introduction</a>
+					<li><a href="#introduction" class="block transition hover:text-purple-300">Introduction</a></li>
+					<li><a href="#getting-started" class="block transition hover:text-purple-300">Getting Started</a>
 					</li>
-					<li>
-						<a href="#getting-started" class="block transition hover:text-purple-300">Getting Started</a>
+					<li><a href="#team-organization" class="block transition hover:text-purple-300">Team Organization</a>
 					</li>
-					<li>
-						<a href="#team-organization" class="block transition hover:text-purple-300">Team Organization</a>
+					<li><a href="#access-control" class="block transition hover:text-purple-300">Access Control</a>
 					</li>
-					<li>
-						<a href="#access-control" class="block transition hover:text-purple-300">Access Control</a>
-					</li>
-					<li>
-						<a href="#file-storage" class="block transition hover:text-purple-300">File Storage</a>
-					</li>
-					<li>
-						<a href="#troubleshooting" class="block transition hover:text-purple-300">Troubleshooting</a>
+					<li><a href="#file-storage" class="block transition hover:text-purple-300">File Storage</a></li>
+					<li><a href="#support" class="block transition hover:text-purple-300">Troubleshooting</a>
 					</li>
 				</ul>
 			</nav>
 		</aside>
 
 		<main class="h-full flex-1 overflow-auto p-8 md:ml-72">
-            <!--this nav only shows on smaller screens to replace the side nav above-->
+			<!--this nav only shows on smaller screens to replace the side nav above-->
 			<nav class="mb-6 flex flex-row space-x-4 overflow-x-auto border-b border-gray-700 pb-2 text-purple-300 md:hidden">
 				<a href="#introduction" class="whitespace-nowrap hover:text-purple-100"> Introduction </a>
 				<a href="#getting-started" class="whitespace-nowrap hover:text-purple-100">Getting Started</a>
 				<a href="#team-organization" class="whitespace-nowrap hover:text-purple-100">Team Organization</a>
 				<a href="#access-control" class="whitespace-nowrap hover:text-purple-100">Access Control</a>
 				<a href="#file-storage" class="whitespace-nowrap hover:text-purple-100"> File Storage </a>
-				<a href="#troubleshooting" class="whitespace-nowrap hover:text-purple-100">Troubleshooting</a>
+				<a href="#support" class="whitespace-nowrap hover:text-purple-100">Troubleshooting</a>
 			</nav>
-			<h1 class="mb-6 text-4xl font-bold">User Guide</h1>
+			<h1 class="mb-8 text-4xl font-bold">User Guide</h1>
 
 			<section id="introduction" class="mb-12">
-				<h2 class="mb-4 text-2xl font-bold text-purple-300">Introduction</h2>
-				<p class="mb-4">
-					Welcome to FMS - your secure cloud storage solution for team collaboration.
-				</p>
-				<p>This guide will help you understand how to use our platform effectively and securely.</p>
+				<h2 class="mb-6 text-2xl font-bold text-purple-300">Introduction</h2>
+				<div class="space-y-4">
+					<p>Welcome to FMS - your secure cloud storage solution for team collaboration.</p>
+					<p>This guide will help you understand how to use our platform effectively.</p>
+				</div>
 			</section>
 
 			<section id="getting-started" class="mb-12">
-				<h2 class="mb-4 text-2xl font-bold text-purple-300">Getting Started</h2>
-				<div class="rounded-lg bg-[#121730] p-6">
-					<h3 class="mb-3 text-xl font-semibold">Creating Your Account</h3>
-					<p class="mb-4">Instructions here.</p>
+				<h2 class="mb-6 text-2xl font-bold text-purple-300">Getting Started</h2>
+				<div class="space-y-4 rounded-lg bg-[#121730] p-6">
+					<h3 class="text-xl font-semibold">Creating Your Account</h3>
+					<p>
+						When creating an account, the only requirement is that username and password must each
+						be between 6 and 12 characters inclusive.
+					</p>
 
-					<h3 class="mb-3 text-xl font-semibold">First Login</h3>
-					<p>When you login, you are redirected to your dashboard where you can see the following:
-                        <li>Created Organisation</li>
-                        <li>Joined Organisation(s)</li>
-                        <li>Invites from other organisations</li>
-                        <li>Notifications about the activity of any organisation you are a member of</li>
-                        <li>Account Settings</li>
-                        <li>Logout button</li>
-                    </p>
+					<h3 class="mt-6 text-xl font-semibold">First Login</h3>
+					<p>
+						When you login, you are redirected to your dashboard where you can see the following:
+					</p>
+					<div class="mt-4 space-y-2 px-6">
+						<li>Created Organisation</li>
+						<li>Joined Organisation(s)</li>
+						<li>Invites from other organisations</li>
+						<li>Notifications about the activity of any organisation you are a member of</li>
+						<li>Account Settings</li>
+						<li>Logout button</li>
+					</div>
 				</div>
 			</section>
 
 			<section id="team-organization" class="mb-12">
-				<h2 class="mb-4 text-2xl font-bold text-purple-300">Team Organization</h2>
-				<div class="mb-6 flex items-start">
-					<div class="mr-4 text-blue-300">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							class="h-6 w-6"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-							/>
-						</svg>
+				<h2 class="mb-6 text-2xl font-bold text-purple-300">Organisations</h2>
+				<p>
+					Organisations are the heart of FMS. An organisation is where members can upload, delete,
+					and download files and folders.
+				</p>
+				<div class="mt-6 space-y-4 rounded-lg bg-[#121730] p-6">
+					<h3 class="text-xl font-semibold">Create Your Organisation</h3>
+					<div class="my-4 rounded-r border-l-4 border-red-600 bg-red-900/30 p-4 text-white">
+						<p class="font-medium">Users are only allowed to create one organisation.</p>
 					</div>
-					<div>
-						<h3 class="mb-2 text-xl font-semibold">Creating Organizations</h3>
-						<p>Learn how to create and manage organizations for your team.</p>
+					<p>As an organisation owner, you are able to do the following:</p>
+					<div class="mt-4 space-y-2 px-6">
+						<li>Invite or remove members to and from your organisation</li>
+						<li>Change the role of a member of your organisation</li>
+						<li>Change the name of your organisation</li>
+						<li>Delete the organisation</li>
 					</div>
-				</div>
-
-				<div class="flex items-start">
-					<div class="mr-4 text-blue-300">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							class="h-6 w-6"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"
-							/>
-						</svg>
-					</div>
-					<div>
-						<h3 class="mb-2 text-xl font-semibold">Inviting Team Members</h3>
-						<p>Instructions for inviting and managing team members.</p>
+					<p class="mt-4">These permissions are exclusive to organisation owners only</p>
+					<h3 class="mt-6 text-xl font-semibold">Join an organisation</h3>
+					<p>
+						Joining an organisation is only possible if the owner of an organisation invites you.
+					</p>
+					<p class="mt-4">
+						In the invites page, you can see all invites you recieved from organisation owners.
+					</p>
+					<div class="my-4 rounded-r border-l-4 border-red-600 bg-red-900/30 p-4 text-white">
+						<p class="font-medium">Users are only allowed to join up to three organisations.</p>
 					</div>
 				</div>
 			</section>
 
 			<section id="access-control" class="mb-12">
-				<h2 class="mb-4 text-2xl font-bold text-purple-300">Access Control</h2>
-				<p>Content for access control section...</p>
+				<h2 class="mb-6 text-2xl font-bold text-purple-300">Access Control</h2>
+				<p>
+					FMS allows creators of organisations to manage the roles of members and what permissions
+					they have within the organisation
+				</p>
+				<div class="mt-6 space-y-4 rounded-lg bg-[#121730] p-6">
+					<p>There are two roles to assign each organisation member:</p>
+					<div class="mt-4 px-6">
+						<li>Editor</li>
+						<div class="mt-2 space-y-2 px-6">
+							<li>Upload files and folders</li>
+							<li>Delete files and folders</li>
+							<li>Download files</li>
+						</div>
+						<li class="mt-4">Viewer</li>
+						<div class="mt-2 space-y-2 px-6">
+							<li>Download files</li>
+						</div>
+					</div>
+					<div class="my-4 rounded-r border-l-4 border-red-600 bg-red-900/30 p-4 text-white">
+						<p class="font-medium">Every new member is assigned the "Editor" role by default.</p>
+					</div>
+					<h3 class="mt-6 text-xl font-semibold">Changing the role of members</h3>
+					<p>
+						To change the role of a member, head to your dashboard and click on the settings icon in
+						"Your Organisation"
+					</p>
+					<p class="mt-4">
+						You will be presented with a list of members where you can change the role of each of
+						them
+					</p>
+					<h3 class="mt-6 text-xl font-semibold">View your role at an organisation</h3>
+					<p>
+						Your role at an organisation can be viewed in the dashboard under the "Joined
+						Organisations" section
+					</p>
+				</div>
 			</section>
 
 			<section id="file-storage" class="mb-12">
-				<h2 class="mb-4 text-2xl font-bold text-purple-300">File Storage</h2>
-				<p>Content for file storage section...</p>
+				<h2 class="mb-6 text-2xl font-bold text-purple-300">File Storage</h2>
+				<p>
+					FMS has a set of rules with regards to folders being created and files being uploaded to
+					an organisation
+				</p>
+				<div class="mt-6 space-y-4 rounded-lg bg-[#121730] p-6">
+					<h3 class="text-xl font-semibold">Folders</h3>
+					<p>The following rules must be followed when creating a folder:</p>
+					<div class="mt-4 space-y-2 px-6">
+						<li>
+							Folder names must be unique within a folder. For example, when you create a folder
+							called "foo" inside a folder called "bar", you cannot create another folder called
+							"foo" at that level
+						</li>
+						<li>
+							Folder names must not be the same as the parent folder. For example, folder "foo"
+							cannot contain a child folder also named "foo"
+						</li>
+						<li>Folder name "root" is not allowed at any level</li>
+						<li>Folder names must be between 3 and 13 characters</li>
+						<li>Folder names can only contain alphanumerical characters and spaces</li>
+					</div>
+					<h3 class="mt-6 text-xl font-semibold">Files</h3>
+					<p>The following rules must be followed when uploading a file:</p>
+					<div class="mt-4 space-y-2 px-6">
+						<li>
+							File names must be unique within a folder. For example, when you upload a file called
+							"foo" inside a folder called "bar", you cannot upload another file called "foo" at
+							that level
+						</li>
+						<li>Maximum file size is 10mb.</li>
+						<li>The following are supported file types:</li>
+						<div class="mt-2 space-y-2 px-6">
+							<li>PDF</li>
+							<li>DOC</li>
+							<li>DOCX</li>
+							<li>JPG</li>
+							<li>PNG</li>
+						</div>
+						<li class="mt-4">
+							File name cannot contain special characters: (&lt;&gt;:&quot;/\|?*)
+						</li>
+					</div>
+					<div class="my-4 rounded-r border-l-4 border-red-600 bg-red-900/30 p-4 text-white">
+						<p class="font-medium">
+							Organisations have a maximum storage space of 5 GB. Hover over the usage number in the
+							dashboard to know exactly how much storage you are using
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<section id="support" class="mb-12">
+				<h2 class="mb-6 text-2xl font-bold text-purple-300">Contact Support</h2>
+				<p>
+					For any further questions or help troubleshooting problems, reach out at
+					bd315977@gmail.com
+				</p>
 			</section>
 		</main>
 	</div>
 </div>
+
+<!--prevent the internal links from jumping around the page and scroll smoothly instead-->
+<style>
+	*{
+		scroll-behavior: smooth;
+	}
+</style>

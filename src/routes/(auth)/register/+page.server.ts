@@ -19,7 +19,7 @@ export const actions:Actions = {
         const repeatPassword = data.get("repeat-password") as string;
 
         // submitted form with empty fields
-        if(username.length === 0 || password.length === 0 || repeatPassword.length === 0){
+        if(username.trim().length === 0 || password.trim().length === 0 || repeatPassword.trim().length === 0){
             return{
                 error: true,
                 message: "Mandatory fields required."

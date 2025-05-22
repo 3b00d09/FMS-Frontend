@@ -13,7 +13,7 @@
     const toastState = getToastState()
 
     function compareOrgName(event: Event) {
-        orgInputValue = (event.target as HTMLInputElement).value;
+        orgInputValue = (event.target as HTMLInputElement).value.trim();
         const hasChanged = originalOrgName !== orgInputValue;
         if(hasChanged) enableSaveButton = true;
         else enableSaveButton = false;
@@ -60,6 +60,7 @@
     }
 
     async function changeOrgName(){
+        
         // disable save changes button to prevent user from calling it again before the server responds
         enableSaveButton = false;
         try{
@@ -67,8 +68,22 @@
                 method:"PUT",
                 credentials:"include"
             })
-            // server returns non 200 for errors
-            if(req.status != 200){
+            // missing url data
+            if(req.status === 422){
+                toastState.triggerToast("Missing required data.", "error", 1500)
+                return;
+            }
+            // unauthenticated request
+            else if(req.status === 401){
+                goto("/login")
+            }
+            // name taken error
+            else if (req.status === 400){
+                toastState.triggerToast("Organisation name taken", "error", 2000)
+                return;
+            }
+            // other errors
+            else if(req.status != 200){
                 toastState.triggerToast("Error performing operation", "error", 3000)
                 return;
             }
@@ -111,12 +126,6 @@
     <div class="p-6 mb-4">
         <div class="flex items-center justify-between mb-4">
             <h3 class="text-xl">Organisation Members</h3>
-            <button class="btn-primary px-4 py-2 rounded font-medium flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                </svg>
-                Invite Member
-            </button>
         </div>
         
         <div class="mb-6">

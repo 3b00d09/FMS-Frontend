@@ -35,11 +35,8 @@
 
 </script>
 
-<!--Look into shadcn svelte for a dialog component-->
 <dialog open={isOpen} class="fixed inset-0 p-0 m-0 w-full h-full overflow-hidden bg-black/50 backdrop-blur-sm">
-    <!-- svelte-ignore a11y_click_events_have_key_events -->
-    <!-- svelte-ignore a11y_no_static_element_interactions -->
-    <div onclick={closeDialog} class="flex items-center justify-center h-full w-full">
+    <div onclick={closeDialog} role="button" tabindex={0} aria-label="Close Dialog" onkeydown={()=>closeDialog} class="flex items-center justify-center h-full w-full">
         <div class="bg-[#111827] rounded-lg shadow-lg w-full max-w-md text-gray-200 overflow-hidden">
             <div class="p-4">
                 <input 
